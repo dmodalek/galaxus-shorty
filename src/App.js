@@ -129,17 +129,15 @@ export default function App() {
           />
 
           <div
-            className={`shortUrlWrapper ${
-              url === "" || apiStatus === "ok" ? " hidden" : ""
-            }`}
+            className={`shortUrlWrapper ${url === "" || apiStatus === "ok" ? " hidden" : ""
+              }`}
           >
             <span className="prefix">
               galax.us <span className="slash">/</span>
             </span>
             <input
-              className={`shortUrlBox ${
-                apiStatus === "error" ? " apiError" : ""
-              }`}
+              className={`shortUrlBox ${apiStatus === "error" ? " apiError" : ""
+                }`}
               type="text"
               value={shortUrl}
               onChange={onShortUrlChange}

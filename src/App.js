@@ -149,7 +149,7 @@ export default function App() {
               }`}
           >
             <span className="prefix">
-              {redirectUrlPrefix} <span className="slash">/</span>
+              https://galax.us <span className="slash">/</span>
             </span>
             <input
               className={`shortUrlBox ${apiStatus === "error" ? " apiError" : ""
@@ -178,7 +178,7 @@ export default function App() {
                 className="generatedUrl"
                 href={`${redirectUrlPrefix}/${shortUrl}`}
               >
-                {redirectUrlPrefix}/{shortUrl}
+                https://galax.us/{shortUrl}
               </a>
               <CopyIcon shortUrl={shortUrl} />
             </div>

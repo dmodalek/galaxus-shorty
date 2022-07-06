@@ -1,5 +1,8 @@
 body {
   margin: 50px;
+  height: 90vh;
+  background-position: left bottom;
+  /* background-image: url('http://localhost:3000/party-turtle.png') */
 }
 
 .App {
@@ -115,6 +118,11 @@ body {
   border: none;
   padding: 8px 10px;
   font-size: 16px;
+  min-width: 180px;
+}
+
+.isLoading {
+  opacity: 0.6;
 }
 
 .generatedUrlWrapper {
@@ -159,5 +167,6 @@ body {
 }
 
 .qrImage {
+  width: 240px;
   cursor: move;
 }

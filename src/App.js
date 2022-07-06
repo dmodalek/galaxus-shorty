@@ -39,6 +39,8 @@ const qrCode = new QRCodeStyling({
 export default function App() {
   const [url, setUrl] = useState("");
   const [src, setSrc] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentColor, setCurrentColor] = useState(0);
   const [shortUrl, setShortUrl] = useState(getRandomShortURL(5));
   const [apiStatus, setApiStatus] = useState(null);
 
@@ -58,11 +60,11 @@ export default function App() {
     qrCode.update({
       data: url,
       dotsOptions: {
-        color: colors[Math.floor(Math.random() * 5)],
+        color: colors[currentColor],
         type: "rounded"
       }
     });
-  }, [url]);
+  }, [url, currentColor]);
 
   useEffect(() => {
     async function fn() {
@@ -85,7 +87,7 @@ export default function App() {
     }
 
     fn();
-  }, [url]);
+  }, [url, currentColor]);
 
   const onUrlChange = (event) => {
     event.preventDefault();
@@ -103,14 +105,27 @@ export default function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url, shortUrl })
     };
+
     fetch(apiURL, requestOptions).then((response) => {
-      if (response.status === 201) {
-        setApiStatus("ok");
-      } else {
-        setApiStatus("error");
-      }
+      setIsLoading(true);
+
+      setTimeout(function () {
+        if (response.status === 201) {
+          setApiStatus("ok");
+          setIsLoading(false);
+        } else {
+          setApiStatus("error");
+          setIsLoading(false);
+        }
+      }, 1000);
+
+
     });
   };
+
+  const changeColor = () => {
+    setCurrentColor(currentColor === 4 ? 0 : currentColor + 1)
+  }
 
   return (
     <>
@@ -144,11 +159,14 @@ export default function App() {
             />
             <div className="createShortUrlButtonWrapper">
               <button
+                disabled={isLoading}
                 onClick={handleCreateShortUrl}
-                className="createShortUrlButton"
+                className={`createShortUrlButton ${isLoading && "isLoading"}`}
               >
-                Create Short URL
+                {isLoading ? "Saving..." : "Create Short URL"}
+
               </button>
+
             </div>
           </div>
           {apiStatus === "ok" && (
@@ -165,7 +183,7 @@ export default function App() {
             </div>
           )}
         </div>
-        {src && <img className="qrImage" alt="QR code" src={src} />}
+        {src && <img onClick={changeColor} className="qrImage" alt="QR code" src={src} />}
       </div>
     </>
   );

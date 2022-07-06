@@ -12,6 +12,7 @@ import {
 } from "./helper";
 
 const apiURL = "https://reqres.in/api/posts";
+const redirectUrlPrefix = "https://galax.us";
 
 const colors = [
   "#c5a278",
@@ -148,7 +149,7 @@ export default function App() {
               }`}
           >
             <span className="prefix">
-              galax.us <span className="slash">/</span>
+              {redirectUrlPrefix} <span className="slash">/</span>
             </span>
             <input
               className={`shortUrlBox ${apiStatus === "error" ? " apiError" : ""
@@ -175,9 +176,9 @@ export default function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="generatedUrl"
-                href={`https://galax.us/${shortUrl}`}
+                href={`${redirectUrlPrefix}/${shortUrl}`}
               >
-                https://galax.us/{shortUrl}
+                {redirectUrlPrefix}/{shortUrl}
               </a>
               <CopyIcon shortUrl={shortUrl} />
             </div>

@@ -80,7 +80,7 @@ export default function App() {
         throw new Error("There is no canvas! Why?");
       }
 
-      while (!isCanvasReady(canvas.toDataURL())) {
+      while (!isCanvasReady(canvas.toDataURL('image/png'))) {
         await sleep(20);
       }
 
